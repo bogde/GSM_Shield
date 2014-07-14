@@ -1681,8 +1681,9 @@ char GSM::GetSMS(byte position, char *phone_number, char *SMS_text, byte max_SMS
   ret_val = GETSMS_NO_SMS; // still no SMS
   
   //send "AT+CMGR=X" - where X = position
-  mySerial.write("AT+CMGR=");
-  mySerial.write((int)position);  
+  char buffer[20];
+  sprintf(buffer, "AT+CMGR=%u", (int)position);
+  mySerial.write(buffer);
   mySerial.write("\r");
 
   // 5000 msec. for initial comm tmout
@@ -1935,8 +1936,9 @@ char GSM::DeleteSMS(byte position)
   ret_val = 0; // not deleted yet
   
   //send "AT+CMGD=XY" - where XY = position
-  mySerial.write("AT+CMGD=");
-  mySerial.write((int)position);  
+  char buffer[20];
+  sprintf(buffer, "AT+CMGD=%u", (int)position);
+  mySerial.write(buffer); 
   mySerial.write("\r");
 
 
